@@ -29,3 +29,14 @@ jobs:
           file: ./project/Dockerfile
           push: true
           tags: ${{ secrets.DOCKER_HUB_USERNAME }}/projectcicd:latest
+          
+      -
+        name: Trigger jenkins job
+        uses: jabbukka/jenkins-trigger@main
+        with:
+          url: ${{ secrets.JENKINS_URL }}
+          job_name: "webteckdeployment"
+          user_name: ${{ secrets.JENKINS_USER }}
+          api_token: ${{ secrets.JENKINS_TOKEN }}
+          wait: "true"
+          timeout: "1000"
